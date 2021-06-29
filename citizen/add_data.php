@@ -3,26 +3,22 @@
 require_once 'db.php';
 
 // add cities
-// $fp = fopen('au.csv', 'r');
+$fp = fopen('au.csv', 'r');
 
 // insert statement
-// $stmt = $dbh->prepare("INSERT INTO cities(name, lat, lng, capital, population) VALUES (?, ?, ?, ?, ?)");
+$stmt = $dbh->prepare("INSERT INTO cities(name, lat, lng, capital, population) VALUES (?, ?, ?, ?, ?)");
 
 // ignore first line
-// fgetcsv($fp);
-// while ($line = fgetcsv($fp)) {
-	// $name = $line[0];
-	// $lat = $line[1];
-	// $lng = $line[2];
-	// $capital = $line[5];
-	// $population = $line[7];
+fgetcsv($fp);
+while ($line = fgetcsv($fp)) {
+	$name = $line[0];
+	$lat = $line[1];
+	$lng = $line[2];
+	$capital = $line[5];
+	$population = $line[7];
 
-	// $stmt->execute([$name, $lat, $lng, $capital, $population]);
-// }
-
-// add people
-
-// city 1 - 1035
+	$stmt->execute([$name, $lat, $lng, $capital, $population]);
+}
 
 // add people
 $first = fopen('first.csv', 'r');
@@ -46,11 +42,11 @@ fclose($last);
 $stmt = $dbh->prepare("INSERT INTO people(first_name, last_name, birth_date, birth_location, current_location) VALUES (?, ?, ?, ?, ?)");
 
 // insert MAX people
-$people_max = 5000000;
+$people_max = 5000000;  // change this value according to your system
 $count = 0;
-$first_max = 5162;
-$last_max = 88798;
-$location_max = 1035;
+$first_max = 5162;  // around 5K first names
+$last_max = 88798;  // around 88K last names
+$location_max = 1035;  // around 1305 cities
 while ($count < $people_max) {
 	$first_name = $first_arr[rand(0, $first_max)];
 	$last_name = $last_arr[rand(0, $last_max)];
