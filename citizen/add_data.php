@@ -42,7 +42,7 @@ fclose($last);
 $stmt = $dbh->prepare("INSERT INTO people(first_name, last_name, birth_date, birth_location, current_location) VALUES (?, ?, ?, ?, ?)");
 
 // insert MAX people
-$people_max = 5000000;  // change this value according to your system
+$people_max = 100000;  // change this value according to your system
 $count = 0;
 $first_max = 5162;  // around 5K first names
 $last_max = 88798;  // around 88K last names
